@@ -35,11 +35,38 @@ class UserService {
 
       return newUser;
     } catch (error) {
-      console.log(
-        "🚀 ~ file: UserServices.js:30 ~ UserService ~ createUser ~ error:",
-        error
-      );
-      return error;
+      throw new Error(error.message);
+    }
+  }
+
+  static async getAllUsers() {
+    try {
+      const users = await User.aggregate([
+        {
+          $lookup: {
+            from: "roles",
+            localField: "role",
+            foreignField: "_id",
+            as: "roleData",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            last_name: 1,
+            other_name: 1,
+            username: 1,
+            email: 1,
+            role: { $arrayElemAt: ["$roleData.name", 0] },
+          },
+        },
+      ]);
+      return users;
+    } catch (error) {
+      throw new Error({
+        message: "Failed to retrieve users",
+        error: error.message,
+      });
     }
   }
 }

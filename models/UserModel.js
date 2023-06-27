@@ -33,6 +33,17 @@ const userSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Role",
     required: true,
+    validator: async function (value) {
+      try {
+        const roleCount = await mongoose
+          .model("Role")
+          .countDocuments({ _id: value });
+        return roleCount > 0;
+      } catch (err) {
+        return false;
+      }
+    },
+    message: "Invalid role",
   },
 });
 

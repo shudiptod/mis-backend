@@ -13,13 +13,21 @@ class UserController {
         password,
         role
       );
-      res.status(201).json(newUser);
+      return res.status(201).json(newUser);
     } catch (error) {
       console.log(
         "🚀 ~ file: UserController.js:11 ~ UserController ~ createUser ~ error:",
         error
       );
-      res.status(500).json({ message: "Failed to create user", error: error });
+      return res.status(500).json(error.message);
+    }
+  }
+  static async getAllUser(req, res) {
+    try {
+      const allUser = await UserService.getAllUsers();
+      return res.status(200).json(allUser);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
   }
 }
