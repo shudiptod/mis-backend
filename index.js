@@ -5,6 +5,7 @@ const userRouter = require("./routers/UserRouter");
 const roleRouter = require("./routers/RoleRouter");
 const authenticate = require("./utils/authMiddleware");
 const AuthRouter = require("./routers/AuthRouter");
+const LocationsRouter = require("./routers/LocationsRouter");
 require("dotenv").config();
 
 const app = express();
@@ -27,6 +28,11 @@ mongoose.connection.on("connected", () => {
 });
 
 // Define a route for testing
+
+app.get("/", (req, res) => {
+  res.status(200).send("Server is running");
+});
+
 app.get("/test", (req, res) => {
   res.status(200).send("OK");
 });
@@ -39,7 +45,12 @@ app.use("/user", userRouter);
 
 app.use("/role", roleRouter);
 
+// auth router
 app.use("/auth", AuthRouter);
+
+// locations router
+
+app.use("/locations", LocationsRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
