@@ -1,4 +1,4 @@
-const Municipality = require("../models/MunicipalityModel");
+const LGA = require("../models/LgaModel");
 const Region = require("../models/RegionModel");
 const State = require("../models/StateModel");
 const Ward = require("../models/WardModel");
@@ -39,7 +39,7 @@ class LocationsService {
 
   static async getAllMunicipalities() {
     try {
-      return await Municipality.find();
+      return await LGA.find();
     } catch (error) {
       throw new Error("Failed to get municipalities");
     }
@@ -81,22 +81,22 @@ class LocationsService {
     }
   }
 
-  static async createMunicipality(municipalityData) {
+  static async createLGA(lgaData) {
     try {
-      const municipality = await Municipality.create(municipalityData);
-      await State.findByIdAndUpdate(municipalityData.state, {
-        $push: { municipalities: municipality._id },
+      const lga = await LGA.create(lgaData);
+      await State.findByIdAndUpdate(lgaData.state, {
+        $push: { municipalities: lga._id },
       });
-      return municipality;
+      return lga;
     } catch (error) {
-      throw new Error("Failed to create municipality");
+      throw new Error("Failed to create lga");
     }
   }
 
   static async createWard(wardData) {
     try {
       const ward = await Ward.create(wardData);
-      await Municipality.findByIdAndUpdate(wardData.municipality, {
+      await LGA.findByIdAndUpdate(wardData.lga, {
         $push: { wards: ward._id },
       });
       return ward;

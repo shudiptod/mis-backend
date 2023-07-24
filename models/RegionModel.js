@@ -1,25 +1,17 @@
-const mongoose = require("mongoose");
-
 // Define the Region schema
-const regionSchema = new mongoose.Schema({
+let mongoose = require("mongoose");
+let Schema = mongoose.Schema;
+let region = new Schema({
   name: {
     type: String,
     required: true,
   },
   code: {
     type: String,
-    required: true,
-    unique: true,
   },
-  states: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "State",
-    },
-  ],
 });
 
 // Define the Region model
-const Region = mongoose.model("Region", regionSchema);
+const Region = mongoose.model("region", region);
 
 module.exports = Region;

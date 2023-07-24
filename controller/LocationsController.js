@@ -63,12 +63,12 @@ class LocationsController {
     }
   }
 
-  static async createMunicipality(req, res) {
+  static async createLGA(req, res) {
     try {
-      const municipality = await LocationsService.createMunicipality(req.body);
-      res.status(201).json(municipality);
+      const lga = await LocationsService.createLGA(req.body);
+      res.status(201).json(lga);
     } catch (error) {
-      res.status(500).json({ error: "Failed to create municipality" });
+      res.status(500).json({ error: "Failed to create lga" });
     }
   }
 

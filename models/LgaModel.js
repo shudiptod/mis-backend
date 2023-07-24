@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
-let ward = new Schema({
+let lga = new Schema({
   name: {
     type: String,
     required: true,
@@ -8,14 +8,14 @@ let ward = new Schema({
   code: {
     type: String,
   },
-  lga: {
+  state: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "lga",
+    ref: "state",
   },
 });
 
-// Define the Ward model
-const Ward = mongoose.model("ward", ward);
+// Define the LGA model
+const LGA = mongoose.model("lga", lga);
 
-module.exports = Ward;
+module.exports = LGA;
