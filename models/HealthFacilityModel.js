@@ -22,10 +22,6 @@ var health_facility = new Schema({
     type: String,
     required: true,
   },
-  date_added: {
-    type: Date,
-    required: true,
-  },
   address: {
     type: String,
     required: true,

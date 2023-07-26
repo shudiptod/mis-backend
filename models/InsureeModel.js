@@ -64,10 +64,6 @@ var insuree = new Schema({
     type: String,
     required: true,
   },
-  date_added: {
-    type: Date,
-    required: true,
-  },
   is_family_head: {
     type: Boolean,
     required: true,

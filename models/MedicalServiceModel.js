@@ -18,10 +18,6 @@ var medical_service = new Schema({
     type: Number,
     required: true,
   },
-  date_added: {
-    type: Date,
-    required: true,
-  },
   description: {
     type: String,
     required: true,

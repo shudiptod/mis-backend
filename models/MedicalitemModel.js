@@ -22,10 +22,6 @@ var medical_item = new Schema({
     type: String,
     required: true,
   },
-  date_added: {
-    type: Date,
-    required: true,
-  },
   description: {
     type: String,
   },

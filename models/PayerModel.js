@@ -14,10 +14,6 @@ var payer = new Schema({
     required: true,
     enum: ["corporative", "donor", "govt", "private", "other"],
   },
-  date_added: {
-    type: Date,
-    required: true,
-  },
   description: {
     type: String,
   },

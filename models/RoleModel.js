@@ -17,10 +17,6 @@ var role = new Schema({
       "accountant",
     ],
   },
-  date_added: {
-    type: Date,
-    required: true,
-  },
 });
 
 // Create the role model
