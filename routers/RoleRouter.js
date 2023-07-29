@@ -10,5 +10,5 @@ roleRouter.get("/get-all", RoleController.getAllRoles);
 //create a new role
 
 roleRouter.post("/create", RoleController.createRole);
-
+roleRouter.get("/:id", RoleController.getRoleById);
 module.exports = roleRouter;

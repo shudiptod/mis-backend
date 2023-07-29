@@ -20,7 +20,7 @@ class AuthController {
 
       // Generate a JWT token
       const token = AuthService.generateToken(user);
-      delete user.password;
+
       // Return the token in the response
       return res.status(200).json({ token: token, user: user });
     } catch (error) {

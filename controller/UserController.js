@@ -2,17 +2,19 @@ const UserService = require("../services/UserServices");
 
 class UserController {
   static async createUser(req, res) {
-    const { last_name, other_name, email, username, password, role } = req.body;
+    const { last_name, first_name, phone, email, username, password, role } =
+      req.body;
 
     try {
-      const newUser = await UserService.createUser(
+      const newUser = await UserService.createUser({
         last_name,
-        other_name,
+        first_name,
         email,
         username,
         password,
-        role
-      );
+        phone,
+        role,
+      });
       return res.status(201).json(newUser);
     } catch (error) {
       console.log(
@@ -59,6 +61,25 @@ class UserController {
       return res.status(200).json(updatedUser);
     } catch (error) {
       return res.status(500).json(error);
+    }
+  }
+  static async deleteUser(req, res) {
+    const userId = req.params.id; // Assuming the user ID is provided in the request params
+
+    try {
+      // Find the user by ID and delete it
+      const deletedUser = await UserService.deleteUserById(userId);
+
+      if (!deletedUser) {
+        // If the user with the provided ID does not exist, return an error
+        return res.status(404).json({ message: "User not found." });
+      }
+
+      // If the user is successfully deleted, return a success message
+      return res.json({ message: "User deleted successfully." });
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      return res.status(500).json({ message: "Internal server error." });
     }
   }
 }
